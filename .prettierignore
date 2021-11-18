@@ -1,0 +1,33 @@
+#-------------------------------------------------------------------------------------------------------------------
+# Keep this section in sync with .gitignore
+#-------------------------------------------------------------------------------------------------------------------
+
+# 👋 (copy + paste your .gitignore file contents here) 👋
+vendor
+
+#-------------------------------------------------------------------------------------------------------------------
+# Prettier-specific overrides
+#-------------------------------------------------------------------------------------------------------------------
+
+# Rush files
+common/temp/
+common/changes/
+common/scripts/
+common/config/
+CHANGELOG.*
+
+# Package manager files
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+shrinkwrap.json
+rush.json
+
+# Build outputs
+dist
+lib
+build
+
+# Prettier reformats code blocks inside Markdown, which affects rendered output
+*.md
+*.mdx
