@@ -1,9 +1,9 @@
 import { getWorkerAddress } from './getWorkerAddress';
 import { request } from './request';
-import { RedisClient } from './types';
+import { RedisClient, RedisConnection } from './types';
 
-export const pingWorker = async (client: RedisClient, namespace: string, workerId: string) => {
-  const address = await getWorkerAddress(client, namespace, workerId);
+export const pingWorker = async (redis: RedisConnection, workerId: string) => {
+  const address = await getWorkerAddress(redis, 'worker', workerId);
   const response = await request(address, '/ping');
   return response;
 };

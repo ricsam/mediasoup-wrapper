@@ -1,7 +1,20 @@
-import { RedisClient } from "./types";
+import { ClientType, RedisClient, RedisConnection } from './types';
 
-export const getWorkerAddress = async (client: RedisClient, namespace: string, workerId: string) => {
-  const address = await client.get(`${namespace}:worker:${workerId}:address`);
+export const setWorkerAddress = async (
+  { client, ns }: RedisConnection,
+  type: ClientType,
+  clientId: string,
+  serverAddress: string
+) => {
+  await client.set(`${ns}:${type}:client:${clientId}:address`, serverAddress);
+};
+
+export const getWorkerAddress = async (
+  { client, ns }: RedisConnection,
+  type: 'worker' | 'router',
+  clientId: string
+) => {
+  const address = await client.get(`${ns}:${type}:client:${clientId}:address`);
   if (!address) {
     throw new Error('invalid address');
   }
